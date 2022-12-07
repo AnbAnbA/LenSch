@@ -1,0 +1,58 @@
+﻿<Page x:Class="LenSch.Pages.ShowListService"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:LenSch.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ShowListService">
+    <Page.Resources>
+        <BitmapImage x:Key="defaultImage" UriSource="/Res/picture.png"/>
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <ListView Name="LSH" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="0,0,0,10" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch">
+                <!--<ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel HorizontalAlignment="Center"></WrapPanel>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>-->
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Padding="5" CornerRadius="5" BorderThickness="1" BorderBrush="BlueViolet">
+                            <Grid Name="GRM" >
+                                <StackPanel>
+                                    <TextBlock Text="Наименование услуги:"></TextBlock>
+                                    <TextBlock Text="{Binding Title}"></TextBlock>
+                                    <Image  Height="100" Width="140" Source="{Binding MainImagePath, TargetNullValue={StaticResource defaultImage}}" HorizontalAlignment="Left"/>
+
+                                    <TextBlock Text="Цена:"></TextBlock>
+                                    <TextBlock Text="{Binding Cost}"></TextBlock>
+                                    <TextBlock Text="Время:"></TextBlock>
+                                    <TextBlock Text="{Binding DurationInSeconds}"></TextBlock>
+                                    <TextBlock Text="Скидка:"></TextBlock>
+                                    <TextBlock Text="{Binding Discount}"></TextBlock>
+
+                                    <ListView Loaded="TextBlock_Loaded" Uid="{Binding ID}"></ListView>
+
+                                    <Button  Uid="{Binding ID}" Name="btdel" Click="btdel_Click"  Content="Удалить" Visibility="Collapsed"></Button>
+                                    <Button Uid="{Binding ID}" Content="Редактировать" Click="btnupd_Click" Name="btnupd" Visibility="Collapsed" ></Button>
+
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </Grid>
+</Page>
