@@ -15,12 +15,15 @@
             <RowDefinition Height="35"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
+        
         <Grid Grid.Row="0">
-
+            <Button Name="btnAdd" Width="130" Height="20" HorizontalAlignment="Left" Margin="16,0,0,0" Content="Добавить услугу" Click="btnAdd_Click" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+            <Button Name="btnAddSC" Width="190" Height="20" HorizontalAlignment="Left" Margin="156,0,0,0" Content="Добавить запись на услугу" Click="btnAddSC_Click" HorizontalContentAlignment="Center" Visibility="Collapsed"/>
+            <Button Name="btnShowSC" Width="190" Height="20" HorizontalAlignment="Left" Margin="356,0,0,0" Content="Просмотр ближайших записей" Click="btnShowSC_Click"  HorizontalContentAlignment="Center" Visibility="Collapsed"/>
         </Grid>
 
         <Grid Grid.Row="1">
-            <ListView Name="LSH" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="0,0,0,10" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch">
+            <ListView Name="LSH"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="0,0,0,10" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch">
                 <!--<ListView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel HorizontalAlignment="Center"></WrapPanel>
@@ -31,21 +34,15 @@
                         <Border Padding="5" CornerRadius="5" BorderThickness="1" BorderBrush="BlueViolet">
                             <Grid Name="GRM" >
                                 <StackPanel>
-                                    <TextBlock Text="Наименование услуги:"></TextBlock>
                                     <TextBlock Text="{Binding Title}"></TextBlock>
                                     <Image  Height="100" Width="140" Source="{Binding MainImagePath, TargetNullValue={StaticResource defaultImage}}" HorizontalAlignment="Left"/>
 
-                                    <TextBlock Text="Цена:"></TextBlock>
-                                    <TextBlock Text="{Binding Cost}"></TextBlock>
-                                    <TextBlock Text="Время:"></TextBlock>
-                                    <TextBlock Text="{Binding DurationInSeconds}"></TextBlock>
-                                    <TextBlock Text="Скидка:"></TextBlock>
-                                    <TextBlock Text="{Binding Discount}"></TextBlock>
+                                    <TextBlock Text="{Binding CostAndTime}"></TextBlock>
+                                    <TextBlock Loaded="TextBlock_Loaded" TextDecorations="Strikethrough" Text="{Binding Cost}" Visibility="Collapsed"></TextBlock>
+                                    <TextBlock Text="{Binding discount}"></TextBlock>
 
-                                    <ListView Loaded="TextBlock_Loaded" Uid="{Binding ID}"></ListView>
-
-                                    <Button  Uid="{Binding ID}" Name="btdel" Click="btdel_Click"  Content="Удалить" Visibility="Collapsed"></Button>
-                                    <Button Uid="{Binding ID}" Content="Редактировать" Click="btnupd_Click" Name="btnupd" Visibility="Collapsed" ></Button>
+                                    <Button Loaded="btdel_Loaded" Uid="{Binding ID}" Name="btdel" Click="btdel_Click" Margin="2" Content="Удалить" Visibility="Collapsed"></Button>
+                                    <Button Loaded="btnupd_Loaded" Uid="{Binding ID}" Content="Редактировать" Click="btnupd_Click" Margin="2"  Name="btnupd" Visibility="Collapsed" ></Button>
 
                                 </StackPanel>
                             </Grid>

@@ -20,7 +20,7 @@ namespace LenSch
     /// </summary>
     public partial class MainWindow : Window
     {
-       private int code;
+       private string code;
         public MainWindow()
         {
             InitializeComponent();
@@ -31,9 +31,8 @@ namespace LenSch
 
         private void BTKod_Click(object sender, RoutedEventArgs e)
         {
-            code = Convert.ToInt32(tbcode.Text);
-
-
+            code = tbcode.Text;
+            FrameC.frameM.Navigate(new Pages.ShowListService(code));
         }
     }
 }
