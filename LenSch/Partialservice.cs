@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace LenSch
 {
@@ -23,6 +24,42 @@ namespace LenSch
                     
             }
         }
+        public string price
+        {
+            get
+            {
+                if (Discount == null)
+                {
+                    return "";
+                }
+                else
+                {
+                    double a = Convert.ToDouble(Cost);
+                    return a + " ";
+                }
+
+            }
+        }
+
+        public SolidColorBrush TextBrush
+        {
+            get
+            {
+                var brushConverter = new BrushConverter();
+
+                if (Discount == null)
+                {
+                    return (SolidColorBrush)(Brush)brushConverter.ConvertFrom("#FFFFFF");
+                }
+                else
+                {
+                    return (SolidColorBrush)(Brush)brushConverter.ConvertFrom("#e7fabf");
+
+                }
+
+            }
+        }
+
         public int sentomin 
         {
             get 
@@ -34,11 +71,15 @@ namespace LenSch
         {
             get 
             {
-                if (Discount != null) 
+                if (Discount != null)
                 {
                     return "* скидка " + (Discount * 100) + "% ";
                 }
-                return "";
+                else 
+                {
+                   return "";
+                }
+                
             }
         }
     }

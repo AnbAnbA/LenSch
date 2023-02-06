@@ -12,14 +12,30 @@
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="105"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         
         <Grid Grid.Row="0">
-            <Button Name="btnAdd" Width="130" Height="20" HorizontalAlignment="Left" Margin="16,0,0,0" Content="Добавить услугу" Click="btnAdd_Click" HorizontalContentAlignment="Center" Visibility="Collapsed" />
-            <Button Name="btnAddSC" Width="190" Height="20" HorizontalAlignment="Left" Margin="156,0,0,0" Content="Добавить запись на услугу" Click="btnAddSC_Click" HorizontalContentAlignment="Center" Visibility="Collapsed"/>
-            <Button Name="btnShowSC" Width="190" Height="20" HorizontalAlignment="Left" Margin="356,0,0,0" Content="Просмотр ближайших записей" Click="btnShowSC_Click"  HorizontalContentAlignment="Center" Visibility="Collapsed"/>
+            <Button Name="btnAdd" Width="130" Height="20" HorizontalAlignment="Left" Margin="16,0,0,70" Content="Добавить услугу" Click="btnAdd_Click" HorizontalContentAlignment="Center"  />
+            <Button Name="btnShowSC" Width="190" Height="20" HorizontalAlignment="Left" Margin="170,0,0,70" Content="Просмотр ближайших записей" Click="btnShowSC_Click"  HorizontalContentAlignment="Center" />
+            <TextBlock Text="Введите название услуги:" Margin="0,35,0,0"></TextBlock>
+            <TextBox x:Name="SerNam" Width="400" Height="15" Margin="150,0,0,13" HorizontalAlignment="Left" TextChanged="SerNam_TextChanged" ></TextBox>
+            <TextBlock Text="Введите описание услуги:" Margin="0,65,0,0"></TextBlock>
+            <TextBox x:Name="SerOpis" Width="400" Height="15" Margin="150,45,0,0" HorizontalAlignment="Left" TextChanged="SerOpis_TextChanged"></TextBox>
+            <ComboBox Width="200" Margin="0,0,10,15" HorizontalAlignment="Right"  Height="22" Name="Sort" SelectionChanged="Sort_SelectionChanged">
+                <ComboBoxItem>По возрастанию</ComboBoxItem>
+                <ComboBoxItem>По убыванию</ComboBoxItem>
+            </ComboBox>
+            <ComboBox Width="200" Margin="0,45,10,0" HorizontalAlignment="Right"  Height="22" Name="Filt" SelectionChanged="Filt_SelectionChanged">
+                <ComboBoxItem>Все</ComboBoxItem>
+                <ComboBoxItem>От 0% До 5%</ComboBoxItem>
+                <ComboBoxItem>От 5% До 15%</ComboBoxItem>
+                <ComboBoxItem>От 15% До 30%</ComboBoxItem>
+                <ComboBoxItem>От 30% До 70%</ComboBoxItem>
+                <ComboBoxItem>От 70% До 100%</ComboBoxItem>
+            </ComboBox>
+            <TextBlock x:Name="ch"  Margin="15,70,0,0" Width="80" FontSize="15" Height="20" HorizontalAlignment="Left"></TextBlock>
         </Grid>
 
         <Grid Grid.Row="1">
@@ -32,18 +48,22 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Border Padding="5" CornerRadius="5" BorderThickness="1" BorderBrush="BlueViolet">
-                            <Grid Name="GRM" >
+                            <Grid Name="GRM" Background="{Binding TextBrush}">
                                 <StackPanel>
                                     <TextBlock Text="{Binding Title}"></TextBlock>
                                     <Image  Height="100" Width="140" Source="{Binding MainImagePath, TargetNullValue={StaticResource defaultImage}}" HorizontalAlignment="Left"/>
-
-                                    <TextBlock Text="{Binding CostAndTime}"></TextBlock>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Name="Price1" Text="{Binding price}"  TextDecorations="Strikethrough"></TextBlock>
+                                        <TextBlock Name="Price" Text="{Binding CostAndTime}"></TextBlock>
+                                    </StackPanel>
+                                   
+                                    
                                     <TextBlock Loaded="TextBlock_Loaded" TextDecorations="Strikethrough" Text="{Binding Cost}" Visibility="Collapsed"></TextBlock>
                                     <TextBlock Text="{Binding discount}"></TextBlock>
 
                                     <Button Loaded="btdel_Loaded" Uid="{Binding ID}" Name="btdel" Click="btdel_Click" Margin="2" Content="Удалить" Visibility="Collapsed"></Button>
                                     <Button Loaded="btnupd_Loaded" Uid="{Binding ID}" Content="Редактировать" Click="btnupd_Click" Margin="2"  Name="btnupd" Visibility="Collapsed" ></Button>
-
+                                    <Button Loaded="btnaddusl_Loaded" Uid="{Binding ID}" Content="Добавить запись на услугу" Click="btnaddusl_Click" Margin="2"  Name="btnaddusl" Visibility="Collapsed" ></Button>
                                 </StackPanel>
                             </Grid>
                         </Border>
